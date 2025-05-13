@@ -1,6 +1,9 @@
 package org.example;
 
- class Departamento implements invitable{
+ class Departamento implements Invitable{
+  public void invitar() {
+
+  }
 
 }
 

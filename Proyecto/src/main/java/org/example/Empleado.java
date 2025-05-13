@@ -12,6 +12,7 @@ class Empleado implements Invitable {
   this.nombre = nombre;
   this.correo = correo;
  }
+ public void invitar(){}
 
  public String getId() { return id; }
 

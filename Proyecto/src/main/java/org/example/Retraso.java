@@ -1,6 +1,6 @@
 package org.example;
 import java.time.Instant;
-class Retraso extends Asitencia {
+class Retraso extends Asistencia {
     private Instant hora;
     public Retraso(Empleado empleado, Instant hora){
         super(empleado);

@@ -1,8 +1,8 @@
 package org.example;
 
-abstract class Asitencia {
+abstract class Asistencia {
     private Empleado empleado;
-    public Asitencia(Empleado empleado){
+    public Asistencia(Empleado empleado){
         this.empleado = empleado;
     }
     public Empleado getEmpleado(){

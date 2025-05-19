@@ -1,6 +1,7 @@
 package org.example;
 import java.time.Instant;
- class Invitacion {
+
+class Invitacion {
     private Instant hora;
 
     public Invitacion(Instant hora) {
@@ -9,5 +10,10 @@ import java.time.Instant;
 
     public Instant getHora() {
         return hora;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(getHora());
     }
 }

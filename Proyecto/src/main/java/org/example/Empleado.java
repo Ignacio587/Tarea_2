@@ -14,19 +14,22 @@ class Empleado implements Invitable {
   this.correo = correo;
   this.departamento = departamento;
  }
-//metodo agregado para que funcione la interfaz
 
  @Override
- public void invitar() {
-  System.out.println("Empleado invitado: "+ nombre);
+ public void invitar(Invitacion invitacion) {
+  System.out.println("Invitacion para: "+ nombre+" "+apellidos+"a la reunion de las "+String.valueOf(invitacion.getHora()));
  }
- public void invitar(){}
 
- public String getId() { return id; }
+ public String getId() {return id;}
 
- public String getApellidos() { return apellidos; }
+ public String getApellidos() {return apellidos;}
 
- public String getNombre() { return nombre; }
+ public String getNombre() {return nombre;}
 
- public String getCorreo() { return correo; }
+ public String getCorreo() {return correo;}
+
+ @Override
+ public String toString() {
+  return "Informacion del Empleado: "+" ID: "+id+" Nombre: "+nombre+" Apellidos: "+apellidos+" Correo: "+correo;
+ }
 }

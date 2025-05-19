@@ -1,11 +1,18 @@
 package org.example;
 
-abstract class Asistencia {
-    private Empleado empleado;
-    public Asistencia(Empleado empleado){
-        this.empleado = empleado;
+class Asistencia {
+    private Object invitado;
+
+    public Asistencia(Object invitado){
+        this.invitado = invitado;
     }
-    public Empleado getEmpleado(){
-        return empleado;
+
+    public Object getInvitado(){
+        return invitado;
+    }
+
+    @Override
+    public String toString(){
+        return invitado.toString()+" llego a tiempo a la reunion";
     }
 }

@@ -1,10 +1,11 @@
 package org.example;
+
 import java.time.*;
 import java.util.*;
-import java.time.LocalDate;
+import java.util.Date;
+
 abstract class Reunion {
-    //variables basicas para el proyecto
-    private LocalDate fecha;
+    private Date fecha;
     private Instant horaPrevista;
     private Duration duracionPrevista;
     private Instant horaInicio;
@@ -14,14 +15,34 @@ abstract class Reunion {
     protected List<Invitacion> invitaciones = new ArrayList<>();
     protected List<Nota> notas = new ArrayList<>();
     protected List<Asistencia> asistencias = new ArrayList<>();
-    //utilizamos el array para calcular despues la asentencia de cada emplenado
-    public Reunion (LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, Empleado organizador, TipoReunion tipo){
+
+    public Reunion (Date fecha, Instant horaPrevista, Duration duracionPrevista, Empleado organizador, TipoReunion tipo){
         this.fecha= fecha;
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
         this.organizador = organizador;
         this.tipo = tipo;
     }
+
+    public Date getFecha() { return fecha; }
+
+    public Instant getHoraPrevista() { return horaPrevista; }
+
+    public Duration getDuracionPrevista() { return duracionPrevista; }
+
+    public Instant getHoraInicio() { return horaInicio; }
+
+    public Instant getHoraFin() { return horaFin; }
+
+    public Empleado getOrganizador() { return organizador; }
+
+    public TipoReunion getTipoReunion() { return tipo; }
+
+    public List<Asistencia> getAsistencias() { return asistencias; }
+
+    public List<Nota> getNotas() { return notas; }
+
+
     public void agregarNota(Nota nota) {
         notas.add(nota);
     }
@@ -35,7 +56,6 @@ abstract class Reunion {
     }
 
     public float calcularTiempoReal() {
-        if (horaInicio == null || horaFin == null) return 0;
         return Duration.between(horaInicio, horaFin).toMinutes();
     }
 
@@ -45,5 +65,20 @@ abstract class Reunion {
 
     public void finalizar() {
         this.horaFin = Instant.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Reunion{" +
+                "fecha=" + fecha +
+                ", horaPrevista=" + horaPrevista +
+                ", duracionPrevista=" + duracionPrevista +
+                ", horaInicio=" + horaInicio +
+                ", horaFin=" + horaFin +
+                ", organizador=" + organizador +
+                ", tipoReunion=" + tipo +
+                ", asistencias=" + asistencias +
+                ", notas=" + notas +
+                '}';
     }
 }

@@ -1,7 +1,7 @@
 package org.example;
 
 class Asistencia {
-    private Object invitado;
+    private final Object invitado;
 
     public Asistencia(Object invitado){
         this.invitado = invitado;

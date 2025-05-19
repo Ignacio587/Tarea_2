@@ -1,7 +1,7 @@
 package org.example;
 
  class Nota {
-    private String contenido;
+    private final String contenido;
 
     public Nota(String contenido) {
         this.contenido = contenido;

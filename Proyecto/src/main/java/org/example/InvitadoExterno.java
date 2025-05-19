@@ -1,9 +1,9 @@
 package org.example;
 
 public class InvitadoExterno implements Invitable {
-    private String apellidos;
-    private String nombre;
-    private String correo;
+    private final String apellidos;
+    private final String nombre;
+    private final String correo;
 
     public InvitadoExterno(String apellidos, String nombre, String correo) {
         this.apellidos = apellidos;
@@ -13,7 +13,7 @@ public class InvitadoExterno implements Invitable {
 
     @Override
     public void invitar(Invitacion invitacion) {
-        System.out.println("Invitacion para: "+ nombre+" "+apellidos+"a la reunion de las "+String.valueOf(invitacion.getHora()));
+        System.out.println("Invitacion para: "+ nombre+" "+apellidos+"a la reunion de las "+ invitacion.getHora());
     }
 
     public String getApellidos() {return apellidos;}

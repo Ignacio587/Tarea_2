@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Departamento implements Invitable {
-  private String nombre;
-  private List<Empleado> empleados;
+  private final String nombre;
+  private final List<Empleado> empleados;
 
 
   public Departamento(String nombre){

@@ -1,11 +1,11 @@
 package org.example;
 
 class Empleado implements Invitable {
- private String id;
- private String apellidos;
- private String nombre;
- private String correo;
- private Departamento departamento;
+ private final String id;
+ private final String apellidos;
+ private final String nombre;
+ private final String correo;
+ private final Departamento departamento;
 
  public Empleado(String id, String apellidos, String nombre, String correo, Departamento departamento) {
   this.id = id;
@@ -17,7 +17,7 @@ class Empleado implements Invitable {
 
  @Override
  public void invitar(Invitacion invitacion) {
-  System.out.println("Invitacion para: "+ nombre+" "+apellidos+"a la reunion de las "+String.valueOf(invitacion.getHora()));
+  System.out.println("Invitacion para: "+ nombre+" "+apellidos+"a la reunion de las "+ invitacion.getHora());
  }
 
  public String getId() {return id;}

@@ -19,11 +19,14 @@ class ReunionPresencialTest {
         departamento = new Departamento("Marketing");
         organizador = new Empleado("001", "Saavedra", "Tomas", "tomas.saavedra@example.com", departamento);
         reunionPresencial = new ReunionPresencial(new Date(), Instant.now(), Duration.ofMinutes(60), organizador, TipoReunion.MARKETING, "Sala de Juntas 1");
+        prueba a = new prueba(reunionPresencial);
+        a.escribir();
     }
 
     @Test
     void testToString_ReunionPresencial() {
-        String esperado = "ReunionPresencial{sala='Sala de Juntas 1'} Reunion{fecha="+reunionPresencial.getFecha()+", horaPrevista="+reunionPresencial.getHoraPrevista()+", duracionPrevista=PT1H, horaInicio=null, horaFin=null, organizador=Informacion del Empleado:  ID: 001 Nombre: Tomas Apellidos: Saavedra Correo: tomas.saavedra@example.com, tipoReunion=MARKETING, asistencias=[], notas=[]}";
+        String esperado = "ReunionPresencial{sala='Sala de Juntas 1'} " +
+                "Reunion{fecha="+reunionPresencial.getFecha()+", horaPrevista="+reunionPresencial.getHoraPrevista()+", duracionPrevista=PT1H, horaInicio=null, horaFin=null, organizador=Informacion del Empleado:  ID: 001 Nombre: Tomas Apellidos: Saavedra Correo: tomas.saavedra@example.com, tipoReunion=MARKETING, asistencias=[], notas=[]}";
         assertEquals(esperado, reunionPresencial.toString());
     }
 

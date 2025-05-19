@@ -1,8 +1,11 @@
 package org.example;
 import java.time.Instant;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 class Retraso extends Asistencia {
-    private Instant hora;
+    private final Instant hora;
 
     public Retraso(Object invitado, Instant hora){
         super(invitado);

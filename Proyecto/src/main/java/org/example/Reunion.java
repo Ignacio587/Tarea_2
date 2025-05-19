@@ -1,20 +1,24 @@
 package org.example;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import java.time.*;
 import java.util.*;
 import java.util.Date;
 
 abstract class Reunion {
-    private Date fecha;
-    private Instant horaPrevista;
-    private Duration duracionPrevista;
+    private final Date fecha;
+    private final Instant horaPrevista;
+    private final Duration duracionPrevista;
     private Instant horaInicio;
     private Instant horaFin;
-    private TipoReunion tipo;
-    private Empleado organizador;
+    private final TipoReunion tipo;
+    private final Empleado organizador;
     protected List<Invitacion> invitaciones = new ArrayList<>();
     protected List<Nota> notas = new ArrayList<>();
     protected List<Asistencia> asistencias = new ArrayList<>();
+
+    String nombreArchivo = "Notas_de_reunion.txt";
 
     public Reunion (Date fecha, Instant horaPrevista, Duration duracionPrevista, Empleado organizador, TipoReunion tipo){
         this.fecha= fecha;
@@ -23,24 +27,6 @@ abstract class Reunion {
         this.organizador = organizador;
         this.tipo = tipo;
     }
-
-    public Date getFecha() { return fecha; }
-
-    public Instant getHoraPrevista() { return horaPrevista; }
-
-    public Duration getDuracionPrevista() { return duracionPrevista; }
-
-    public Instant getHoraInicio() { return horaInicio; }
-
-    public Instant getHoraFin() { return horaFin; }
-
-    public Empleado getOrganizador() { return organizador; }
-
-    public TipoReunion getTipoReunion() { return tipo; }
-
-    public List<Asistencia> getAsistencias() { return asistencias; }
-
-    public List<Nota> getNotas() { return notas; }
 
 
     public void agregarNota(Nota nota) {
@@ -67,6 +53,24 @@ abstract class Reunion {
         this.horaFin = Instant.now();
     }
 
+    public Date getFecha() { return fecha; }
+
+    public Instant getHoraPrevista() { return horaPrevista; }
+
+    public Duration getDuracionPrevista() { return duracionPrevista; }
+
+    public Instant getHoraInicio() { return horaInicio; }
+
+    public Instant getHoraFin() { return horaFin; }
+
+    public Empleado getOrganizador() { return organizador; }
+
+    public TipoReunion getTipoReunion() { return tipo; }
+
+    public List<Asistencia> getAsistencias() { return asistencias; }
+
+    public List<Nota> getNotas() { return notas; }
+
     @Override
     public String toString() {
         return "Reunion{" +
@@ -81,4 +85,5 @@ abstract class Reunion {
                 ", notas=" + notas +
                 '}';
     }
+
 }

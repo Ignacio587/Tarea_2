@@ -14,6 +14,6 @@ public class Main {
         organizador = new Empleado("001", "Saavedra", "Tomas", "tomas.saavedra@example.com", departamento);
         reunionPresencial = new ReunionPresencial(new Date(), Instant.now(), Duration.ofMinutes(60), organizador, TipoReunion.MARKETING, "Sala de Juntas 1");
 
-        System.out.println(organizador.toString());
+        System.out.println(organizador);
     }
 }

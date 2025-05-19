@@ -4,7 +4,7 @@ import java.time.*;
 import java.util.Date;
 
 public class ReunionVirtual extends Reunion {
-    private String enlace;
+    private final String enlace;
 
     public ReunionVirtual(Date fecha, Instant horaPrevista, Duration duracionPrevista, Empleado organizador, TipoReunion tipo, String enlace) {
         super(fecha, horaPrevista, duracionPrevista, organizador, tipo);

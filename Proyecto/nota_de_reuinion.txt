@@ -1,1 +1,0 @@
-ReunionPresencial{sala='Sala de Juntas 1'} Reunion{fecha=Tue May 20 16:23:11 CLT 2025, horaPrevista=2025-05-20T20:23:11.204890500Z, duracionPrevista=PT1H, horaInicio=null, horaFin=null, organizador=Informacion del Empleado:  ID: 001 Nombre: Tomas Apellidos: Saavedra Correo: tomas.saavedra@example.com, tipoReunion=MARKETING, asistencias=[], notas=[]}

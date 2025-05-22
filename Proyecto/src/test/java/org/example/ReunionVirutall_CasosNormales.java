@@ -2,15 +2,15 @@ package org.example;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.time.Instant;
+
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ReunionPresencialTest {
-    private ReunionPresencial reunionPresencial;
+class ReunionVirutall_CasosNormales {
+    private ReunionVirtual reunionVirtual;
     private Departamento marketing;
     private Empleado organizador;
     private Empleado empleado1;
@@ -29,7 +29,7 @@ class ReunionPresencialTest {
     void setUp() {
         marketing = new Departamento("Marketing");
         organizador = new Empleado("000", "Saavedra", "Tomas", "tomas.saavedra@example.com", marketing);
-        reunionPresencial = new ReunionPresencial(new Date(), Instant.now(), Duration.ofMinutes(60), organizador, TipoReunion.MARKETING, "Sala de Juntas 1");
+        reunionVirtual = new ReunionVirtual(new Date(), Instant.now(), Duration.ofMinutes(60), organizador, TipoReunion.MARKETING, "https://teams.microsoft.com/l/meetup-join/19%3ameeting");
         empleado1 = new Empleado("001", "Gómez", "Ana", "ana.gomez@example.com", marketing);
         empleado2 = new Empleado("002", "Pérez", "Juan", "juan.perez@example.com", marketing);
         empleado3 = new Empleado("003", "Rodríguez", "Sofía", "sofia.rodriguez@example.com", marketing);
@@ -51,47 +51,56 @@ class ReunionPresencialTest {
         marketing.agregarEmpleado(empleado9);
         marketing.agregarEmpleado(empleado10);
         invitado = new InvitadoExterno("Diosdado","Damaso", "ddiosdado@example.com");
-        Informe a = new Informe(reunionPresencial);
-        a.escribir();
     }
 
     /**Casos Normales*/
     @Test
     void registrarAsistenciaDepartamento_ReunionPresencial() {
         Asistencia departamento = new Asistencia(marketing);
-        reunionPresencial.registrarAsistencia(departamento);
+        reunionVirtual.registrarAsistencia(departamento);
         for(int i=0; i<10; i++) {
-            assertEquals(reunionPresencial.asistencias.get(i).getInvitado().toString(),marketing.getEmpleados().get(i).toString());
+            assertEquals(reunionVirtual.asistencias.get(i).getInvitado().toString(),marketing.getEmpleados().get(i).toString());
         }
     }
 
     @Test
     void registrarAsistenciaEmpleadoUnico_ReunionPresencial() {
         Asistencia empleado = new Asistencia(empleado1);
-        reunionPresencial.registrarAsistencia(empleado);
-        assertEquals(reunionPresencial.asistencias.get(0).getInvitado().toString(),empleado1.toString());
+        reunionVirtual.registrarAsistencia(empleado);
+        assertEquals(reunionVirtual.asistencias.get(0).getInvitado().toString(),empleado1.toString());
     }
 
     @Test
     void registrarAsistenciaInvitadoExterno_ReunionPresencial() {
         Asistencia invitadoExterno = new Asistencia(invitado);
-        reunionPresencial.registrarAsistencia(invitadoExterno);
-        assertEquals(reunionPresencial.asistencias.get(0).getInvitado().toString(),invitado.toString());
+        reunionVirtual.registrarAsistencia(invitadoExterno);
+        assertEquals(reunionVirtual.asistencias.get(0).getInvitado().toString(),invitado.toString());
     }
 
     @Test
     void agregarNota_ReunionPresencial(){
         Nota N = new Nota("Esta es una nota de prueba");
-        reunionPresencial.agregarNota(N);
-        assertEquals(reunionPresencial.getNotas().get(0).getContenido(),N.getContenido());
+        reunionVirtual.agregarNota(N);
+        assertEquals(reunionVirtual.getNotas().get(0).getContenido(),N.getContenido());
+    }
+
+    @Test
+    void iniciar_ReunionPresencial(){
+        reunionVirtual.iniciar();
+        assertEquals(reunionVirtual.getHoraInicio(), Instant.now());
+    }
+
+    @Test
+    void finalizar_ReunionPresencial(){
+        reunionVirtual.iniciar();
+        reunionVirtual.finalizar();
+        assertEquals(reunionVirtual.getHoraFin(), Instant.now());
     }
 
     @Test
     void calcularTiempoReal_ReunionPresencial(){
-        reunionPresencial.iniciar();
-        reunionPresencial.finalizar();
-        assertEquals(reunionPresencial.calcularTiempoReal(), 0.0);
+        reunionVirtual.iniciar();
+        reunionVirtual.finalizar();
+        assertEquals(reunionVirtual.calcularTiempoReal(), 0.0);
     }
-
-
 }

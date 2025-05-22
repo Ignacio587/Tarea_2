@@ -1,11 +1,11 @@
 package org.example;
 
 class Empleado implements Invitable {
- private final String id;
- private final String apellidos;
- private final String nombre;
- private final String correo;
- private final Departamento departamento;
+ private  String id;
+ private  String apellidos;
+ private  String nombre;
+ private  String correo;
+ private  Departamento departamento;
 
  public Empleado(String id, String apellidos, String nombre, String correo, Departamento departamento) {
   this.id = id;
@@ -28,8 +28,31 @@ class Empleado implements Invitable {
 
  public String getCorreo() {return correo;}
 
+ public void setnombre(String nombre){
+  this.nombre = nombre;
+ }
+ public void setApellidos(String apellidos) {
+  this.apellidos = apellidos;
+ }
+
+ public void setNombre(String nombre) {
+  this.nombre = nombre;
+ }
+
+ public void setCorreo(String correo) {
+  this.correo = correo;
+ }
+ public void setDepartamento(Departamento departamento) {
+  this.departamento = departamento;
+ }
+
  @Override
  public String toString() {
-  return "Informacion del Empleado: "+" ID: "+id+" Nombre: "+nombre+" Apellidos: "+apellidos+" Correo: "+correo;
+  return "Informacion del Empleado: " +
+          " ID: " + id +
+          " Nombre: " + nombre +
+          " Apellidos: " + apellidos +
+          " Correo: " + correo;
  }
 }
+

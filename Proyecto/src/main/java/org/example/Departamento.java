@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Departamento implements Invitable {
-  private final String nombre;
+  private  String nombre;
   private final List<Empleado> empleados;
 
 
@@ -21,6 +21,10 @@ class Departamento implements Invitable {
 
   public String getNombre(){
       return nombre;
+  }
+
+  public void setNombre( String nombre){
+    this.nombre = nombre;
   }
 
   public int obtenerCantidadEmpleados() {

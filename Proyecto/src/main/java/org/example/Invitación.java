@@ -2,7 +2,7 @@ package org.example;
 import java.time.Instant;
 
 class Invitacion {
-    private final Instant hora;
+    private  Instant hora;
 
     public Invitacion(Instant hora) {
         this.hora = hora;
@@ -10,6 +10,9 @@ class Invitacion {
 
     public Instant getHora() {
         return hora;
+    }
+    public void setHora(Instant hora){
+        this.hora= hora;
     }
 
     @Override

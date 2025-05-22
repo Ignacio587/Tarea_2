@@ -1,7 +1,10 @@
 package org.example;
 
+/**
+ *
+ */
 class Asistencia {
-    private final Object invitado;
+    private  Object invitado;
 
     public Asistencia(Object invitado){
         this.invitado = invitado;
@@ -9,6 +12,9 @@ class Asistencia {
 
     public Object getInvitado(){
         return invitado;
+    }
+    public void setInvitado(Object invitado){
+        this.invitado = invitado;
     }
 
     @Override

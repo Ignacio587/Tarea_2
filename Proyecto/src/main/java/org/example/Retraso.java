@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 class Retraso extends Asistencia {
-    private final Instant hora;
+    private  Instant hora;
 
     public Retraso(Object invitado, Instant hora){
         super(invitado);
@@ -14,6 +14,11 @@ class Retraso extends Asistencia {
 
     public Instant getHora(){
         return hora;
+    }
+
+    @Override
+    public void setInvitado(Object invitado) {
+        super.setInvitado(invitado);
     }
 
     @Override

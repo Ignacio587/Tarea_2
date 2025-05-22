@@ -1,7 +1,7 @@
 package org.example;
 
  class Nota {
-    private final String contenido;
+    private  String contenido;
 
     public Nota(String contenido) {
         this.contenido = contenido;
@@ -10,7 +10,11 @@ package org.example;
         return contenido;
     }
 
-    @Override
+     public void setContenido(String contenido) {
+         this.contenido = contenido;
+     }
+
+     @Override
     public String toString() {
         return "Nota{" + contenido + '\''+'}';
     }

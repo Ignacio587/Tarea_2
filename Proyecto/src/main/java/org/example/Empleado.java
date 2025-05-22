@@ -18,6 +18,7 @@ class Empleado implements Invitable {
  @Override
  public void invitar(Invitacion invitacion) {
   System.out.println("Invitacion para: "+ nombre+" "+apellidos+"a la reunion de las "+ invitacion.getHora());
+
  }
 
  public String getId() {return id;}

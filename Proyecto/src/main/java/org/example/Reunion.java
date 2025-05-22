@@ -1,6 +1,4 @@
 package org.example;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import java.time.*;
 import java.util.*;
@@ -14,7 +12,7 @@ abstract class Reunion {
     private Instant horaFin;
     private final TipoReunion tipo;
     private final Empleado organizador;
-    protected List<Invitacion> invitaciones = new ArrayList<>();
+    protected Invitacion invitacion;
     protected List<Nota> notas = new ArrayList<>();
     protected List<Asistencia> asistencias = new ArrayList<>();
 
@@ -26,19 +24,21 @@ abstract class Reunion {
         this.duracionPrevista = duracionPrevista;
         this.organizador = organizador;
         this.tipo = tipo;
+        this.invitacion = new Invitacion(horaPrevista);
     }
-
 
     public void agregarNota(Nota nota) {
         notas.add(nota);
     }
 
-    public void agregarInvitacion(Invitacion invitacion) {
-        invitaciones.add(invitacion);
-    }
-
     public void registrarAsistencia(Asistencia asistencia) {
-        asistencias.add(asistencia);
+        if(asistencia.getInvitado() instanceof Departamento){
+            for (Empleado e : ((Departamento) asistencia.getInvitado()).getEmpleados()){
+                Asistencia a = new Asistencia(e);
+                asistencias.add(a);
+            }
+        }
+        else{asistencias.add(asistencia);}
     }
 
     public float calcularTiempoReal() {

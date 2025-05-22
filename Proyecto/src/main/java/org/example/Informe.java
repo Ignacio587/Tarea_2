@@ -2,9 +2,9 @@ package org.example;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class prueba {
+public class Informe {
     Reunion reunion;
-    public prueba(Reunion reunion){
+    public Informe(Reunion reunion){
         this.reunion=reunion;
     }
     public  void escribir(){
@@ -12,7 +12,8 @@ public class prueba {
         FileWriter escritor = new FileWriter("nota_de_reuinion.txt");
         escritor.write(reunion.toString());
         escritor.close();
-    } catch (IOException e) {
+        }
+        catch (IOException e) {
+        }
     }
-}
 }

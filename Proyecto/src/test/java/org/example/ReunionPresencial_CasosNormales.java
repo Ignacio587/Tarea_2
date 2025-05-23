@@ -8,6 +8,10 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Clase de pruebas unitarias para verificar el comportamiento de {@link ReunionPresencial}
+ * en casos normales.
+ */
 class ReunionPresencial_CasosNormales {
     private ReunionPresencial reunionPresencial;
     private Departamento marketing;
@@ -24,6 +28,13 @@ class ReunionPresencial_CasosNormales {
     private Empleado empleado10;
     private InvitadoExterno invitado;
 
+    /**
+     * Configuración inicial para cada prueba.
+     * Se inicializan los objetos de {@link Departamento}, {@link Empleado},
+     * {@link ReunionPresencial} e {@link InvitadoExterno}.
+     * Se crea un departamento de Marketing y 10 empleados asociados a él,
+     * además de un organizador para la reunión y un invitado externo.
+     */
     @BeforeEach
     void setUp() {
         marketing = new Departamento("Marketing");
@@ -52,9 +63,14 @@ class ReunionPresencial_CasosNormales {
         invitado = new InvitadoExterno("Diosdado","Damaso", "ddiosdado@example.com");
     }
 
-    /**Casos Normales*/
+    /**
+     * Verifica el registro de asistencia de un departamento completo en una reunión presencial,
+     * sin retraso.
+     * Para ello se verifica que el metodo toString de cada uno de los asistentes coincida en retorno con el de los
+     * integrantes del departamento invitado.
+     */
     @Test
-    void registrarAsistenciaDepartamento_ReunionPresencial() {
+    void registrarAsistenciaDepartamento_1_ReunionPresencial() {
         Asistencia departamento = new Asistencia(marketing);
         reunionPresencial.registrarAsistencia(departamento);
         for(int i=0; i<10; i++) {
@@ -62,20 +78,80 @@ class ReunionPresencial_CasosNormales {
         }
     }
 
+    /**
+     * Verifica el registro de asistencia de un departamento completo en una reunión presencial,
+     * con un retraso de 15 min.
+     * Para ello se verifica que el metodo toString de cada uno de los asistentes coincida en retorno con el de los
+     * integrantes del departamento invitado.
+     */
     @Test
-    void registrarAsistenciaEmpleadoUnico_ReunionPresencial() {
+    void registrarAsistenciaDepartamento_2_ReunionPresencial() {
+        Duration tiempoDeRetraso = Duration.ofMinutes(15);
+        Instant horaPrevistaConRetraso = reunionPresencial.getHoraPrevista().plus(tiempoDeRetraso);
+        Retraso departamento = new Retraso(marketing, horaPrevistaConRetraso);
+        reunionPresencial.registrarAsistencia(departamento);
+        for(int i=0; i<10; i++) {
+            assertEquals(reunionPresencial.asistencias.get(i).getInvitado().toString(),marketing.getEmpleados().get(i).toString());
+        }
+    }
+
+    /**
+     * Verifica el registro de asistencia de un empleado particular en una reunión presencial,
+     * sin retraso.
+     * Para ello se verifica que el metodo toString del unico asistente coincida en retorno con el del empleado invitado.
+     */
+    @Test
+    void registrarAsistenciaEmpleadoUnico_1_ReunionPresencial() {
         Asistencia empleado = new Asistencia(empleado1);
         reunionPresencial.registrarAsistencia(empleado);
         assertEquals(reunionPresencial.asistencias.get(0).getInvitado().toString(),empleado1.toString());
     }
 
+    /**
+     * Verifica el registro de asistencia de un empleado particular en una reunión presencial,
+     * con retraso.
+     * Para ello se verifica que el metodo toString del unico asistente coincida en retorno con el del empleado invitado.
+     */
     @Test
-    void registrarAsistenciaInvitadoExterno_ReunionPresencial() {
+    void registrarAsistenciaEmpleadoUnico_2_ReunionPresencial() {
+        Duration tiempoDeRetraso = Duration.ofMinutes(15);
+        Instant horaPrevistaConRetraso = reunionPresencial.getHoraPrevista().plus(tiempoDeRetraso);
+        Retraso empleado = new Retraso(empleado1,horaPrevistaConRetraso);
+        reunionPresencial.registrarAsistencia(empleado);
+        assertEquals(reunionPresencial.asistencias.get(0).getInvitado().toString(),empleado1.toString());
+    }
+
+    /**
+     * Verifica el registro de asistencia de un invitado externo en una reunión presencial,
+     * sin retraso.
+     * Para ello se verifica que el metodo toString del unico asistente coincida en retorno con el del invitado externo.
+     */
+    @Test
+    void registrarAsistenciaInvitadoExterno_1_ReunionPresencial() {
         Asistencia invitadoExterno = new Asistencia(invitado);
         reunionPresencial.registrarAsistencia(invitadoExterno);
         assertEquals(reunionPresencial.asistencias.get(0).getInvitado().toString(),invitado.toString());
     }
 
+    /**
+     * Verifica el registro de asistencia de un invitado externo en una reunión presencial,
+     * con retraso.
+     * Para ello se verifica que el metodo toString del unico asistente coincida en retorno con el del invitado externo.
+     */
+    @Test
+    void registrarAsistenciaInvitadoExterno_2_ReunionPresencial() {
+        Duration tiempoDeRetraso = Duration.ofMinutes(15);
+        Instant horaPrevistaConRetraso = reunionPresencial.getHoraPrevista().plus(tiempoDeRetraso);
+        Retraso invitadoExterno = new Retraso(invitado, horaPrevistaConRetraso);
+        reunionPresencial.registrarAsistencia(invitadoExterno);
+        assertEquals(reunionPresencial.asistencias.get(0).getInvitado().toString(),invitado.toString());
+    }
+
+    /**
+     * Verifica la capacidad de agregar una nota correctamente a una reunión presencial.
+     * Para ello se verifica que el metodo toString del la nota en la lista de notas
+     * coincida en retorno con el de la nota creada.
+     */
     @Test
     void agregarNota_ReunionPresencial(){
         Nota N = new Nota("Esta es una nota de prueba");
@@ -83,12 +159,20 @@ class ReunionPresencial_CasosNormales {
         assertEquals(reunionPresencial.getNotas().get(0).getContenido(),N.getContenido());
     }
 
+    /**
+     * Verifica el inicio de una reunión presencial.
+     * Se espera que la hora de inicio de la reunión sea establecida a la hora actual.
+     */
     @Test
     void iniciar_ReunionPresencial(){
         reunionPresencial.iniciar();
         assertEquals(reunionPresencial.getHoraInicio(), Instant.now());
     }
 
+    /**
+     * Verifica la finalización de una reunión presencial.
+     * Se espera que la hora de inicio de la reunión sea establecida a la hora actual.
+     */
     @Test
     void finalizar_ReunionPresencial(){
         reunionPresencial.iniciar();
@@ -96,6 +180,11 @@ class ReunionPresencial_CasosNormales {
         assertEquals(reunionPresencial.getHoraFin(), Instant.now());
     }
 
+    /**
+     * Verifica el cálculo del tiempo real de una reunión presencial.
+     * En este caso, al iniciar y finalizar la reunión consecutivamente en el test,
+     * el tiempo real calculado debería ser aproximadamente cero.
+     */
     @Test
     void calcularTiempoReal_ReunionPresencial(){
         reunionPresencial.iniciar();

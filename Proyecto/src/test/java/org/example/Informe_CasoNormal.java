@@ -24,7 +24,7 @@ class Informe_CasoNormal {
     private Departamento marketing;
     private Empleado organizador;
     private Empleado empleado;
-    private Path rutaArchivo; // La ruta completa del archivo que esperamos que se cree
+    private Path rutaArchivo;
     private String contenidoEsperado;
 
     /**proporciona un directorio temporal y unico para cada test*/

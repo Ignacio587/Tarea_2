@@ -16,8 +16,7 @@ class Informe_CasoReunionNull {
     private ReunionPresencial reunionPresencial;
     private ReunionVirtual reunionVirtual;
     private Informe informe;
-    private Path rutaArchivo; // La ruta completa del archivo que esperamos que se cree
-    private String contenidoEsperado;
+    private Path rutaArchivo;
 
     /**proporciona un directorio temporal y unico para cada test*/
     @TempDir
@@ -40,25 +39,20 @@ class Informe_CasoReunionNull {
     @Test
     void escribir_ReunionPresencial() {
         reunionPresencial = null;
-        try {
+        assertThrows(ReunionNullExepcion.class, () -> {
             informe = new Informe(reunionPresencial, rutaArchivo);
-        } catch (ReunionNullExepcion e) {
-            throw new RuntimeException(e);
-        }
+        });
     }
 
     /**
      * Prueba para verificar que el metodo escribir lanza la exepcion {@link ReunionNullExepcion} cuando recibe como argumento una
      * {@link ReunionVirtual} null
      */
-
     @Test
     void escribir_ReunionVirtual() {
         reunionVirtual = null;
-        try {
+        assertThrows(ReunionNullExepcion.class, () -> {
             informe = new Informe(reunionVirtual, rutaArchivo);
-        } catch (ReunionNullExepcion e) {
-            throw new RuntimeException(e);
-        }
+        });
     }
 }

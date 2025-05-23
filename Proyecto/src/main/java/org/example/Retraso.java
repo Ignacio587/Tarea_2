@@ -23,6 +23,6 @@ class Retraso extends Asistencia {
 
     @Override
     public String toString(){
-        return super.getInvitado().toString()+" llego tarde a la reunion";
+        return super.getInvitado().toString()+" llego tarde a la reunion a las" + hora ;
     }
 }

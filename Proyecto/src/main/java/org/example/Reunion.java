@@ -33,6 +33,7 @@ abstract class Reunion {
         notas.add(nota);
     }
 
+
     public void registrarAsistencia(Asistencia asistencia) {
         if(asistencia.getInvitado() instanceof Departamento){
             for (Empleado e : ((Departamento) asistencia.getInvitado()).getEmpleados()){
@@ -48,20 +49,13 @@ abstract class Reunion {
             for (Empleado e : ((Departamento) ausencia.getInvitado()).getEmpleados()) {
                 Asistencia a = new Asistencia(e);
                 ausencias.add(a);
+
             }
         } else {
             ausencias.add(ausencia);
         }
     }
-    public void registrarRetrasos(Retraso retraso) {
-        if (retraso.getInvitado() instanceof Departamento) {
-            for (Empleado e : ((Departamento) retraso.getInvitado()).getEmpleados()) {
-                retrasos.add(new Retraso(e, retraso.getHora()));
-            }
-        } else {
-            retrasos.add(retraso);
-        }
-    }
+
     public List<Asistencia> obtenerAsistencias(){
         return asistencias;
     }
@@ -79,7 +73,7 @@ abstract class Reunion {
         if (total == 0) return 0f;
         return (asistencias.size() * 100f) / total;
     }
-    
+
     public List<Retraso> obtenerRetrasoso(){
         return retrasos;
     }

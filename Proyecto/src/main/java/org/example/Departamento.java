@@ -6,6 +6,7 @@ import java.util.List;
 class Departamento implements Invitable {
   private  String nombre;
   private final List<Empleado> empleados;
+  public int TotalDeInvitados=0;
 
 
   public Departamento(String nombre){
@@ -27,10 +28,6 @@ class Departamento implements Invitable {
     this.nombre = nombre;
   }
 
-  public int obtenerCantidadEmpleados() {
-      return empleados.size();
-  }
-
   public List<Empleado> getEmpleados(){
       return empleados;
   }
@@ -38,6 +35,9 @@ class Departamento implements Invitable {
   public void agregarEmpleado(Empleado e){
    empleados.add(e);
   }
+  public int ObtenerCantidadDeEmpleados(){
+      return empleados.size();
+    }
 
   @Override
   public String toString(){

@@ -15,6 +15,8 @@ abstract class Reunion {
     protected Invitacion invitacion;
     protected List<Nota> notas = new ArrayList<>();
     protected List<Asistencia> asistencias = new ArrayList<>();
+    protected List<Asistencia> ausencias = new ArrayList<>();
+    protected List<Retraso> retrasos = new ArrayList<>();
 
     String nombreArchivo = "Notas_de_reunion.txt";
 
@@ -38,7 +40,48 @@ abstract class Reunion {
                 asistencias.add(a);
             }
         }
-        else{asistencias.add(asistencia);}
+        else {asistencias.add(asistencia);}
+
+    }
+    public void registrarAusencia(Asistencia ausencia) {
+        if (ausencia.getInvitado() instanceof Departamento) {
+            for (Empleado e : ((Departamento) ausencia.getInvitado()).getEmpleados()) {
+                Asistencia a = new Asistencia(e);
+                ausencias.add(a);
+            }
+        } else {
+            ausencias.add(ausencia);
+        }
+    }
+    public void registrarRetrasos(Retraso retraso) {
+        if (retraso.getInvitado() instanceof Departamento) {
+            for (Empleado e : ((Departamento) retraso.getInvitado()).getEmpleados()) {
+                retrasos.add(new Retraso(e, retraso.getHora()));
+            }
+        } else {
+            retrasos.add(retraso);
+        }
+    }
+    public List<Asistencia> obtenerAsistencias(){
+        return asistencias;
+    }
+
+    public int ObtenerTotalAsistencia(int cantida_de_empleado){
+        return asistencias.size();
+    }
+
+    public List<Asistencia> getAusencias() {
+        return ausencias;
+    }
+
+    public float obtenerPorcentajeAsistencia() {
+        int total = asistencias.size() + ausencias.size() + retrasos.size();
+        if (total == 0) return 0f;
+        return (asistencias.size() * 100f) / total;
+    }
+    
+    public List<Retraso> obtenerRetrasoso(){
+        return retrasos;
     }
 
     public float calcularTiempoReal() {

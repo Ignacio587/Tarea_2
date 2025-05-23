@@ -1,7 +1,9 @@
 package org.example;
 
 /**
+ *clase para guardar las asistencia de los empleados, y ver si llegaron a tiempo
  *
+ *@author ignacio578
  */
 class Asistencia {
     private  Object invitado;

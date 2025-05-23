@@ -13,6 +13,7 @@ class Empleado implements Invitable {
   this.nombre = nombre;
   this.correo = correo;
   this.departamento = departamento;
+
  }
 
  @Override

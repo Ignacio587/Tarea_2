@@ -13,7 +13,7 @@ public class InvitadoExterno implements Invitable {
 
     @Override
     public void invitar(Invitacion invitacion) {
-        System.out.println("Invitacion para: "+ nombre+" "+apellidos+"a la reunion de las "+ invitacion.getHora());
+        System.out.println("Invitacion para: "+ nombre+" "+apellidos+" a la reunion de las "+ invitacion.getHora());
     }
 
     public String getApellidos() {return apellidos;}

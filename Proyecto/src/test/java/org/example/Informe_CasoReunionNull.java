@@ -8,7 +8,6 @@ import java.nio.file.Path;
 
 
 import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Clase de prueba para ejemplificar la generacion de informes para las reuniones cuando la reunion es nula
  */

@@ -12,9 +12,10 @@ abstract class Reunion {
     private Instant horaFin;
     private final TipoReunion tipo;
     private final Empleado organizador;
-    protected Invitacion invitacion;
     protected List<Nota> notas = new ArrayList<>();
+    protected List<Invitacion> invitaciones = new ArrayList<>();
     protected List<Asistencia> asistencias = new ArrayList<>();
+    protected List<Ausencia> ausencias = new ArrayList<>();
 
     String nombreArchivo = "Notas_de_reunion.txt";
 
@@ -24,14 +25,33 @@ abstract class Reunion {
         this.duracionPrevista = duracionPrevista;
         this.organizador = organizador;
         this.tipo = tipo;
-        this.invitacion = new Invitacion(horaPrevista);
     }
 
     public void agregarNota(Nota nota) {
         notas.add(nota);
     }
 
-    public void registrarAsistencia(Asistencia asistencia) {
+    public void agregarInvitacion(Invitacion invitacion) throws NullPointerException {
+        if(invitacion==null){throw new NullPointerException();}
+        if(invitacion.getInvitado() instanceof Departamento){
+            ((Departamento) invitacion.getInvitado()).invitar(invitacion);
+            for (Empleado e : ((Departamento) invitacion.getInvitado()).getEmpleados()){
+                Invitacion a = new Invitacion(horaPrevista, e);
+                invitaciones.add(a);
+            }
+        }
+        if(invitacion.getInvitado() instanceof Empleado){
+            ((Empleado) invitacion.getInvitado()).invitar(invitacion);
+            invitaciones.add(invitacion);
+        }
+        if(invitacion.getInvitado() instanceof InvitadoExterno){
+            ((InvitadoExterno) invitacion.getInvitado()).invitar(invitacion);
+            invitaciones.add(invitacion);
+        }
+    }
+
+    public void registrarAsistencia(Asistencia asistencia) throws NullPointerException {
+        if(asistencia==null){throw new NullPointerException();}
         if(asistencia.getInvitado() instanceof Departamento){
             for (Empleado e : ((Departamento) asistencia.getInvitado()).getEmpleados()){
                 Asistencia a = new Asistencia(e);
@@ -39,6 +59,17 @@ abstract class Reunion {
             }
         }
         else{asistencias.add(asistencia);}
+    }
+
+    public void registrarAusencia(Ausencia ausencia) throws NullPointerException{
+        if(ausencia==null){throw new NullPointerException();}
+        if(ausencia.getInvitado() instanceof Departamento){
+            for (Empleado e : ((Departamento) ausencia.getInvitado()).getEmpleados()){
+                Ausencia a = new Ausencia(e);
+                ausencias.add(a);
+            }
+        }
+        else{ausencias.add(ausencia);}
     }
 
     public float calcularTiempoReal() {
@@ -68,6 +99,12 @@ abstract class Reunion {
     public TipoReunion getTipoReunion() { return tipo; }
 
     public List<Asistencia> getAsistencias() { return asistencias; }
+
+    public int getNumeroAsistentes(){return asistencias.size();}
+
+    public int getNumeroAusencia(){return ausencias.size();}
+
+    public float getPorcentajeAsistencia(){return (asistencias.size()/invitaciones.size())*100;}
 
     public List<Nota> getNotas() { return notas; }
 
